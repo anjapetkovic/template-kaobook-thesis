@@ -1,0 +1,63 @@
+%% Input and output encoding:
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}  % to allow unicode in source
+
+%% Language
+\usepackage[english]{babel}
+
+\usepackage{fontspec}
+
+% Load the bibliography package
+\usepackage[maxbibnames=99]{styles/kaobiblio}
+\addbibresource{thesis.bib} % Bibliography file
+
+% Load mathematical packages for theorems and related environments. NOTE: choose only one between 'mdftheorems' and 'plaintheorems'.
+\usepackage{styles/mdftheorems}
+%\usepackage{styles/plaintheorems}
+
+% \graphicspath{{img/}} % Paths in which to look for images
+
+\makeindex[columns=3, title=Alphabetical Index, intoc] % Make LaTeX produce the files required to compile the index
+
+\makeglossaries % Make LaTeX produce the files required to compile the glossary
+
+\makenomenclature % Make LaTeX produce the files required to compile the nomenclature
+
+
+% Customising margin citations
+\renewcommand{\formatmargincitation}[1]{%
+	\color{Gray!80} \parencite{#1}: \citeauthor*{#1}
+	\sbox0{\citeyear{#1}}%
+    \ifdim\wd0=0pt
+      {}% if is empty
+    \else
+      {(\citeyear{#1}), }% if is not empty
+    \fi
+	\citetitle{#1}\\%
+}
+
+%% AMS and other general math packages:
+\usepackage{amsfonts}
+\usepackage{amsmath}           % basic ams math environments and symbols
+\usepackage{amssymb,amsthm}    % ams symbols and theorems
+
+\usepackage{mathtools} % for \mathrlap
+\usepackage{upgreek} % for upright greek letters
+% \usepackage{newtxtext,newtxmath}
+
+%% For slightly smaller tokens for syntax classes
+\usepackage{scalerel}
+
+%% For nicely framed figure
+\usepackage{mdframed}
+
+\usepackage{xcolor}
+
+%% For syntax of type theory:
+\usepackage{mathpartir} % for inference rules
+
+
+%% For code coloring
+\usepackage{listings} % package for code
+\usepackage{lstcoq} % Coq code coloring
+

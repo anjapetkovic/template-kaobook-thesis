@@ -1,0 +1,119 @@
+% -------------------------------------------------------------
+% Kaobook side notes
+% -------------------------------------------------------------
+
+% Reference to bibliography
+\newcommand{\refbib}{\hyperref[bib]{Bibliography}}
+
+% Reminder box
+\newcommand{\reminder}[3][0pt]{%
+  \marginnote[#1]{
+    \begin{kaobox}[
+      frametitle=Reminder: #2,
+      backgroundcolor=YellowGreen!25!White,
+      frametitlebackgroundcolor=YellowGreen!25!White
+    ]
+      #3
+    \end{kaobox}
+  }
+}
+
+% Definition box
+\newcommand{\sidedef}[3][0pt]{%
+  \marginnote[#1]{
+    \begin{kaobox}[
+      % frametitle=Definition: #2,
+      backgroundcolor=GreenYellow!25!White,
+      % frametitlebackgroundcolor=GreenYellow!25!White
+    ]
+      #3
+    \end{kaobox}
+  }
+}
+
+\newcommand{\sidedeffr}[3][0pt]{%
+  \marginnote[#1]{
+    \begin{kaobox}[
+      frametitle=Définition: #2,
+      backgroundcolor=GreenYellow!25!White,
+      frametitlebackgroundcolor=GreenYellow!25!White
+    ]
+      #3
+    \end{kaobox}
+  }
+}
+
+% Warning box
+\newcommand{\warn}[1]{%
+  \begin{kaobox}[
+    % frametitle=,
+    backgroundcolor=OrangeRed!25!White,
+    % frametitlebackgroundcolor=GreenYellow!25!White
+  ]
+    #1
+  \end{kaobox}
+}
+
+
+% -------------------------------------------------------------
+
+\newcommand{\defemph}[1]{\textcolor{Maroon}{\textbf{\emph{#1}}}} % defined term
+
+% -------------------------------------------------------------
+% Type theoretic symbols
+% -------------------------------------------------------------
+
+\newcommand{\dummy}{{\star}} % dummy value
+\newcommand{\mto}{{\mapsto}} % short \mapsto (can you find a shorter arrow?)
+\newcommand{\finmap}[1]{\langle #1 \rangle} % finite map
+
+\newcommand{\Inst}[4]{#1 \in \mathrm{Inst}(#2, #3, #4)} % \Inst{I}{\Xi}{\Theta}{\Gamma} is an instantiation of \Xi over \Theta and \Gamma
+\newcommand{\upto}[2]{#1_{(#2)}} % restriction of an instantiation
+\newcommand{\act}[1]{#1_*} % action of an instantiation
+\newcommand{\upact}[2]{#1_{(#2)*}} % combination of restriction and action
+
+
+
+\newcommand{\theory}[1]{\mathcal{#1}} % a type theory
+\newcommand{\derivation}{\mathcal{D}}
+
+% BNF grammars
+\newcommand{\bnfis}{\mathrel{\;{:}{:}{=}\ }}
+\newcommand{\bnfor}{\mathrel{\;\big|\ \ }}
+
+% Frame around a set of rules, to be used in  figures
+\newenvironment{ruleframe}{\begin{mdframed}[linecolor=gray]}{\end{mdframed}}
+
+% Signatures
+
+\newcommand{\sym}[1]{\mathsf{#1}} % a symbol
+\newcommand{\symM}{\sym{M}} % generic meta-variable
+\newcommand{\rawRule}[2]{#1 \Longrightarrow #2} % the raw rule
+
+% The syntax of computations
+\newcommand{\abstr}[1]{\{#1\}} % abstraction
+
+\newcommand{\B}{\mathcal{b}} % generic boundary thesis
+\newcommand{\BB}{\mathcal{B}} % abstracted boundary thesis
+
+\newcommand{\J}{\mathcal{j}} % generic judgement thesis
+\newcommand{\JJ}{\mathcal{J}} % abstracted judgement thesis
+
+\newcommand{\var}[1]{\mathsf{#1}} % a font for free variables/atoms
+\newcommand{\isType}[1]{#1\;\mathsf{type}}
+\newcommand{\of}{{:}} % a : A with less spacing around the colon
+
+\newcommand{\types}{\vdash} % another name for entailment
+\newcommand{\ctx}{\;\mathsf{ctx}} % judgement that something is a valid context
+
+\newcommand{\plug}[2]{#1{\setlength{\fboxrule}{0.5pt}\setlength{\fboxsep}{1pt}\fbox{\vphantom{$#1$}$#2$}}} % fill the head of a boundary
+
+
+% rule name for use in text
+\newcommand{\rulename}[1]{\textnormal{\textsc{#1}}}
+\newcommand{\rref}[1]{\hyperref[#1]{\rulename{#1}}} % hyperlink a rule
+
+
+% named inference rule
+\definecolor{rulenameColor}{rgb}{0.5,0.5,0.5}
+\newcommand{\inferenceRule}[3]{\inferrule*[lab={\label{#1}\rulename{\color{rulenameColor}#1}}]{#2}{#3}}

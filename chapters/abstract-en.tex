@@ -1,0 +1,68 @@
+\chapter{Abstract}
+
+In this thesis we present a meta-analysis of a wide class of general type theories, focusing on three aspects: transformations of type theories, elaboration of type theories, and a general equality checking algorithm.
+
+Type theories provide the mathematical foundations of many proof assistants. We build towards understanding of how they interact by studying their meta-theoretic properties and checking them against an implementation of the flexible proof assistant Andromeda~2, which supports user-specified type theories.
+
+Our meta-analysis is built on the definition of finitary type theories. We define \emph{syntactic transformations} of type theories and prove they form a relative monad for the syntax. To account for the derivability structure, we upgrade the definition to \emph{type-theoretic transformations} that cover some familiar examples, like propositions as types translation and the definitional extension. Once these definitions are accomplished we prove some meta-theorems.
+%
+The usefulness of type-theoretic transformations is unveiled in the definition of an elaboration and we prove an elaboration theorem, saying that every finitary type theory has an elaboration.
+
+To tackle the implementational side, we design a general and user-extensible equality checking algorithm, applicable to a finitary type theories. The algorithm is composed of a type-directed phase for applying extensionality rules and a normalization phase based on computation rules. Both kinds of rules are defined using the type-theoretic concept of object-invertible rules. We specify sufficient syntactic criteria for recognizing such rules and a simple pattern-matching algorithm for applying them.
+A third component of the algorithm is a suitable notion of principal arguments, which determines a notion of normal form. By varying these, we obtain known notions, such as weak head-normal and strong normal forms.
+%
+We prove that our algorithm is sound.
+%
+We implemented it in the Andromeda~2 proof assistant.
+
+\vspace{\baselineskip}
+
+%\textbf{Math. Subj. Class.}
+\noindent\textbf{\textup{2020} Mathematics Subject Classification:}
+%% Type theory:
+  03B38%
+%% Mechanization of proofs and logical operations
+% , 03B35%
+%% Logic in computer science:
+, 03B70%
+%% Categorical logic, topoi [See also 18B25, 18C05, 18C10]
+% , 03G30%
+%% Categories of fibrations, relations to K-theory, relations to type theory:
+% , 18N45%
+%% Theories (e.g., algebraic theories), structure, and semantics
+, 18C10%
+%% Categorical semantics of formal languages
+% , 18C50%
+%% Software, source code, etc. for problems pertaining to computer science
+%, 68-04%
+%% Theory of programming languages
+% , 68N15%
+%% Functional programming and lambda calculus
+% , 68N18%
+%% Modes of computation (nondeterministic, parallel, interactive, probabilistic, etc.)
+% , 68Q10%
+%% Semantics in the theory of computing [See also 03B70, 06B35, 18C50]
+% , 68Q55%
+%% Theorem proving (automated and interactive theorem provers, deduction, resolution, etc.):
+, 68V15%
+%% Formalization of mathematics in connection with theorem provers
+, 68V20%
+%% Symbolic computation and algebraic computation
+% , 68W30%
+%% Metamathematics of constructive systems:
+, 03F50%
+%% Proof theory, general (including proof-theoretic semantics)
+, 03F03%
+%% Cut-elimination and normal-form theorems
+%, 03F05%
+%% Structure of proofs
+, 03F07
+
+
+\noindent\textbf{Keywords:}
+Dependent type theory,
+algebraic theory,
+%categorical logic,
+proof assistant,
+type-theoretic elaboration
+equality checking

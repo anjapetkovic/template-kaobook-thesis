@@ -1,0 +1,81 @@
+\chapter{Prologue: The story of Carla}
+\labch{carla}
+
+Meet Carla.
+
+\begin{center}
+    \includegraphics[height=4cm]{img/carla.jpg}
+\end{center}
+\marginnote[-2cm]{Carla. Source: Pngwing.}
+
+Carla is a young mathematician, ready to take on the world. One day she was sitting in her office, re-reading a paper she had written and was just published, when she suddenly almost spilled the cup of chamomile tea (or at least that is what she claims it was) in her hand. There was a glaring mistake in one of her proofs. How could she miss that?! Hmmmmm, how could all the reviewers miss that? Well, she had been pretty tired in the days before the submission deadline, as she (as usually) procrastinated with writing the paper to the last minute, so she had probably not been as focused as she would have wanted. And if she was completely honest with herself, every time she had reviewed a paper thus far, she had read some parts more thoroughly than others. To calm her nerves she tried to fix the mistake, setting down the cup in her shaking hands first. Of course, since the mistake was not just a typo, it was not so easy.
+
+When hours passed with no luck, she left the office frustrated and tired, thanking herself she took the train to work that morning instead of driving herself. Observing the changing scenery from the train windows, her mind drifted to the events of that day. Naturally, she will publish the corrected version of the proof -- if she ever finds a way to fix it. But what bothered her the most was that the mistake slipped through the cracks and made its way to being published at all.
+
+Seeking consolation and a little bit of schadenfreude, Carla opened up her internet browser and searched for similar stories. She stumbled upon the story of Vladimir Voevodsky, a Russian mathematician with an impressive résumé, after all he did receive the prestigious Field's medal for his work. It turns out that after Voevodsky was awarded the medal, he wrote another paper~\sidecite[]{Voevodsky1991:mistake} which was published and only after a mistake was found~\sidecite[+0.3cm]{Simpson1998:correctVV}. Concerned with the drawbacks of the human-reviewing process, he grew increasingly convinced that proofs should be checked by computers, as well as humans. He used his mathematical influence to accelerate the research in the area of proof assistants, computer software that does what the names suggests - assists humans in proving and checking the proofs. The evolution of the proof assistants goes hand in hand with the development of mathematical foundations, of which type theories, as it seems to Carla, are the most popular candidates on which proof assistants are based.
+
+Carla was intrigued. She heard people mentioning proof assistants before, but so far she brushed it off as a special niche for the fanatics of constructive mathematics. A little disappointed with her own prejudice, yet curious of this new world, she decided to look into the matter a little further. She found out that there are many proof assistants based on type theories~\sidecite[-4cm]{coq-site,agda-site,lean,mortberg2019:cubicalAgda,redTTRef,cubicalttMortberg,Isaev2020:Arend} and that their underlying theories differ. As a mathematician, she was dazzled by the fact that Georges Gonthier and his team machine-checked the proof of the odd order theorem~\sidecite[]{OddOrder10.1007/978-3-642-39634-2_14}, a proof renowned to be very long and difficult.
+
+What further fascinated her was how using proof assistants one could not only machine-check mathematical proofs, but also formalize correctness of computer programs. What a revelation! As a fairly experienced programmer she was well aware of the usual way people test correctness of computer programmed functions: they choose a set of inputs and check if the function computes the outputs they expect. Of course they try to cover as many different examples of input as they can think of, but well, who trusts the programmers to catch all the cases? The situation is a bit better if one uses typed programming languages. If a function is supposed to return a list of integers, but suddenly it tries to output a string, the compiler will already catch the error and impose some discipline. But even then, errors that respect the type-system will not get caught (unless there is a specific input-output test for it somewhere). This (to Carla's eyes new) paradigm of proving correctness of programs was a player on a whole other level. We do not just \emph{test} the correctness, we can \emph{prove} a program fits its specification in \emph{every} possible case.
+Carla could quickly imagine use cases for such a tool, when we want to be absolutely super duper sure the software is correct, like sending a rocket on Mars and knowing the navigation system is bug-free, or having a laser operation on your eyes when every millimeter makes a difference. Of course not every computer bug is lethal, in the majority of cases it just causes some frustration when an application on the phone unexpectedly crashes. With her experience, Carla soon realized that it takes a substantial amount of knowledge, work, time, and energy to verify program correctness for a sizable project, but a price worth paying for the ``lethal" cases.
+A bit of further investigation into the subject led Carla to learn that an entire compiler for a version of programming language C was verified by Xavier Leroy and his team in a project called CompCert~\sidecite[]{Leroy-backend}. This is definitely a game changer as it eliminates the possibility of a bug occurring in the compiler itself, so a programmer who translates her programs to byte-code using this verified compiler has only but herself to blame for the possible mistakes in the code.
+
+% \begin{figure*}
+%     \includegraphics[height=4cm]{img/ariane5.jpg}
+%     \caption{The Ariane 5 rocket at Cité de l'espace, Toulouse, France.}
+% \end{figure*}
+
+Carla was overwhelmed with relief, joy and all this new knowledge. She decided then and there to try proof assistants out herself.
+But where to start? The gods of the internet guided her to the Curry-Howard correspondence~\sidecite[]{Wadler15:prop-as-types, Curry34:prop-as-types, Curry-Freys58:combinatoryLogic, Howard80:Formulae-as-types} relating her knowledge of logic with type theory. She never thought of proofs as objects before, to her they were justifications that theorems and propositions were correct, but now proofs are thought of elements of types written as $p : A$. To Carla this was a little unusual. If proofs are objects, how do we use logical connectives? Let us see, if Carla wants to prove that $a$ and $b$ holds, then she needs to provide two proofs, one for $a$ and one for $b$, so a \emph{pair} of proofs.
+%
+\begin{equation*}
+    \text{proving} \qquad a \wedge b \qquad \text{corresponds to} \qquad (p_1, p_2) : A \times B
+\end{equation*}
+%
+With an implication $a \implies b$ we know that if we have a proof of $a$, then we have a proof of $b$, so it is like a function that takes a proof of $a$ and provides a proof of $b$.
+%
+\begin{equation*}
+    \text{proving} \qquad a \implies b \qquad \text{corresponds to} \qquad p : A \to B
+\end{equation*}
+%
+Easy peasy lemon squeezy.\sidenote{It is not actually that trivial. We need to introduce dependent product types and dependent sums and have a whole discussion about the law of excluded middle. But this is the story for another time, posssibly a textbook.}
+
+Before Carla could start playing around with a proof assistant, she was faced with a decision of which one to use. Since she had no previous experience with proof assistants, all the factors that influence experts, like the nature of the problem to be formalized, expressivity of the underlying type theory, availability of the necessary libraries, performance of a proof assistant etc., were not yet relevant to her. At the end, she decided to start with Coq~\sidecite[]{coq-site}, claiming it was because it was so widely used (as she remains in denial that it was because of the name).
+
+Over the course of time, with grit, perseverance, and a lot of help from the kind-hearted type-theory experts, Carla gradually gained experience with formalizing proofs.
+One day she was finally ready to tackle the proof from her paper -- the one that almost spilled her chamomile tea. Now that she enriched her mathematical intuition, it was easy to spot the mistake and, what's more, the proof assistant helped her identify and solve the problem. But there was another upside: Carla was now confident that her proof was correct and she will not have to go through the same emotional turmoil again. She felt like a superwoman!
+
+\begin{center}
+    \includegraphics[height=4cm]{img/carlaSuperwoman.jpg}
+\end{center}
+\marginnote[-2cm]{Carla as a superwoman. Source: Pngwing and TopPng.}
+
+While formalizing (or at least trying to fomalise) proofs, Carla learned some of the intricacies of type theories and proof assistants. For example, one of the convenient features of Coq\sidenote{Implicit arguments are a common techique also in proof assistants other than Coq.} is that Carla (and the other users) can declare some of the arguments of functions implicit like in the definition of the identity function below.
+%
+\begin{lstlisting}[language=Coq]
+    Definition id {A : Type} (x : A) : A := x.
+\end{lstlisting}
+%
+The function as defined takes two arguments:
+a type argument \lstinline[language=Coq]{A} and a term argument \lstinline[language=Coq]{x} of type \lstinline[language=Coq]{A}. But the first argument is implicit (denoted by the curly braces \lstinline[language=Coq]|{}|), as it can be inferred if we compute the type of the second argument. Thus Carla does not have to write the type of the domain (and codomain) of the identity function every time she uses it. What a relief!
+
+Another important feature, Carla learned, is that Coq knows how to compute with terms. The command
+%
+\begin{lstlisting}[language=Coq]
+    Eval compute in double (double (S 0)).
+\end{lstlisting}
+%
+computes to \lstinline[language=Coq]{S(S(S(S(0))))} which is a unary representation of the number $4$, where \lstinline[language=Coq]{double} is suitably defined function that doubles a natural number and \lstinline[language=Coq]{S} is the successor. Behind the scenes is an equality checking algorithm\sidenote{Equality checking algorithms are are also an essential part of other proof assistants.} with a normalization component that enables such (and much more complex) computations.
+
+Carla also observed there is a lot of mathematical knowledge already formalized in several libraries, like UniMath~\sidecite[]{UniMath} for example, and even more still missing formalization. However, what troubled Carla is that the libraries, and what is worse the underlying type theories, between proof assistants are not always compatible. What can be proven in a type theory depends on its rules and axioms, which are specific to the theory itself. But Carla knows that not every proof relies on \emph{all} the rules and axioms of the theory, just the ones that are used in deriving it, after all there are theorems proven using many different type theories. Maybe if a fragment of the theory used to prove a theorem is compatible with another theory, we could translate the proof to another proof assistant?
+
+Carla's sharp mathematical intuition screamed that if we are going to fiddle with the proofs and translate them into another type theory, there better be a precise mathematical (meta-)theory that allows us to do just that. Looking for a general and possibility syntactic definition of a type theory and transformations of type theories, she found some very deep and elaborate notions~\sidecite[]{bauer20:gtt,bauer:_finit,uemura2019general,harper2021equationalLF,Dybjer1995:InternalTT:CwF,CARTMELL68:CwA,awodey2018:NaturalModels,Winterhalter2020:PhD}, but unfortunately none of them analyzed syntactic transformations to the extent she had hoped for.
+
+With a playful mind and an enthusiastic heart, inspired by all the meta-theoretic mathematical definitions of type theory Carla turned to proof assistants to experiment. So where better to start than in a general-type-theory purpose proof assistant Andromeda~2~\sidecite[+4cm]{andromeda-site}. While happy that she can input the rules of the desired type theory herself, she was soon getting frustrated with the fact that the stupid machine did not know how to compute anything. Andromeda~2 was lacking the support of an equality checking algorithm. But how do we design an equality-checking algorithm when we don't even know what equality rules will appear in the theory?
+
+Carla's heart sank. Yet again the lack of meta-theoretic results obstructed her experiments. It was definitely the time to make another chamomile tea.
+
+% \begin{figure*}
+%     \includegraphics[height=5cm]{img/Andromeda_Galaxy.jpg}
+%     \caption{Andromeda galaxy. Source: Wikipedia.}
+% \end{figure*}

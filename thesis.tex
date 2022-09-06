@@ -1,0 +1,300 @@
+% chktex-file 46
+% chktex-file 45
+% chktex-file 1
+% chktex-file 26
+% chktex-file 24
+\documentclass[
+  fontsize=10pt,
+  twoside=false
+  % overfullrule
+]{kaobook}
+% \documentclass[11pt]{amsart}
+
+\input{preamble}
+
+\input{macros}
+
+
+\begin{document}
+
+% XeLaTeX tikzmark fix
+% Coutesy of https://tex.stackexchange.com/questions/364498/tikz-offsets-origin-when-compiled-in-xelatex-as-compared-to-pdflatex
+\makeatletter
+\def\pgfsys@hboxsynced#1{%
+  {%
+    \pgfsys@beginscope%
+    \setbox\pgf@hbox=\hbox{%
+      \hskip\pgf@pt@x%
+      \raise\pgf@pt@y\hbox{%
+        \pgf@pt@x=0pt%
+        \pgf@pt@y=0pt%
+        \special{pdf: content q}%
+        \pgflowlevelsynccm%
+        \pgfsys@invoke{q -1 0 0 -1 0 0 cm}%
+        \special{pdf: content -1 0 0 -1 0 0 cm q}% translate to original coordinate system
+        \pgfsys@invoke{0 J [] 0 d}% reset line cap and dash
+        \wd#1=0pt%
+        \ht#1=0pt%
+        \dp#1=0pt%
+        \box#1%
+        \pgfsys@invoke{n Q Q Q}%
+      }%
+      \hss%
+    }%
+    \wd\pgf@hbox=0pt%
+    \ht\pgf@hbox=0pt%
+    \dp\pgf@hbox=0pt%
+    \pgfsys@hbox\pgf@hbox%
+    \pgfsys@endscope%
+  }%
+}
+\makeatother
+
+\setmainfont[
+	Ligatures=TeX,
+	% UprightFont = ,
+	ItalicFont = Fira Sans Light Italic,
+	% SmallCapsFont = ,
+	BoldFont = Fira Sans,
+	BoldItalicFont = Fira Sans Italic
+]{Fira Sans Light}
+% \setsansfont[Ligatures=TeX]{Fira Sans}
+\setmonofont[Ligatures=TeX]{Fira Mono}
+
+\urlstyle{same}
+
+%----------------------------------------------------------------------------------------
+%	BOOK INFORMATION
+%----------------------------------------------------------------------------------------
+\newcommand{\programmesl}{Matematika} %
+\newcommand{\programmeen}{Mathematics} %
+\newcommand{\authorname}{Anja~Petković~Komel} %
+\newcommand{\mentor}{prof.~dr.~Andrej Bauer}  %
+
+\newcommand{\slovenetitle}{Meta-analiza teorij tipov z uporabo v oblikovanju formalnih dokazov}
+\newcommand{\englishtitle}{Meta-analysis of type theories with an application to the design of formal proofs}
+\newcommand{\graduationyear}{2021} %
+\definecolor{fmfred}{HTML}{e22526}
+
+% \subject{PhD Thesis}
+
+\title{\englishtitle}
+\subtitle{Doctoral thesis}
+
+\author{\authorname}
+
+\date{Ljubljana, \graduationyear}
+
+\publishers{Adviser: \mentor}
+
+
+%----------------------------------------------------------------------------------------
+
+\frontmatter % Denotes the start of the pre-document content, uses roman numerals
+
+%----------------------------------------------------------------------------------------
+%	OUTPUT TITLE PAGE AND PREVIOUS
+%----------------------------------------------------------------------------------------
+
+% Note that \maketitle outputs the pages before here
+
+% If twoside=false, \uppertitleback and \lowertitleback are not printed
+% To overcome this issue, we set twoside=semi just before printing the title pages, and set it back to false just after the title pages
+\KOMAoptions{twoside=semi}
+% \includepdf{import/cover}
+% \maketitle
+
+\thispagestyle{empty} % no page number
+
+\includegraphics[height=3cm]{img/logo_UL.pdf}\\
+\noindent{\large
+UNIVERSITY OF LJUBLJANA\\[1mm]
+FACULTY OF \textcolor{fmfred}{MATHEMATICS AND PHYSICS}\\[1mm]
+DEPARTMENT OF MATHEMATICS\\[5mm]
+\programmeen\ -- 3rd~cycle}
+%
+\vfill
+
+\begin{center}
+  \large
+  \authorname\\[3mm]
+  \Large
+  \textcolor{Maroon}{\textbf{\MakeUppercase{\englishtitle}}}\\[10mm]
+  \large
+  Doctoral thesis \\[1cm]
+  Adviser: \mentor \\[2mm]
+\end{center}
+\vfill
+
+\noindent{\large Ljubljana, \graduationyear}
+
+\cleardoublepage
+
+\thispagestyle{empty} % no page number
+
+\includegraphics[height=3cm]{img/logo_UL.pdf}\\
+\noindent{\large
+UNIVERZA V LJUBLJANI\\[1mm]
+FAKULTETA ZA \textcolor{fmfred}{MATEMATIKO IN FIZIKO}\\[1mm]
+ODDELEK ZA MATEMATIKO\\[5mm]
+\programmesl\ -- 3.~stopnja}
+%
+\vfill
+
+\begin{center}
+  \large
+  \authorname\\[3mm]
+  \Large
+  \textcolor{Maroon}{\textbf{\MakeUppercase{\slovenetitle}}}\\[10mm]
+  \large
+  Doktorska disertacija \\[1cm]
+  Mentor: \mentor \\[2mm]
+\end{center}
+\vfill
+
+\noindent{\large Ljubljana, \graduationyear}
+
+\cleardoublepage
+
+\KOMAoptions{twoside=false}
+
+%----------------------------------------------------------------------------------------
+%	PREFACE
+%----------------------------------------------------------------------------------------
+
+%\input{chapters/preface.tex}
+\input{chapters/abstract-en.tex}
+\pagelayout{margin} % Restore margins
+\input{chapters/how-to-read.tex}
+% \input{chapters/slovene.tex} % slovene summary
+\pagelayout{wide} % No margins
+
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS & LIST OF FIGURES/TABLES
+%----------------------------------------------------------------------------------------
+
+\begingroup % Local scope for the following commands
+
+% Define the style for the TOC, LOF, and LOT
+%\setstretch{1} % Uncomment to modify line spacing in the ToC
+%\hypersetup{linkcolor=blue} % Uncomment to set the colour of links in the ToC
+\setlength{\textheight}{23cm} % Manually adjust the height of the ToC pages
+
+% Turn on compatibility mode for the etoc package
+\etocstandarddisplaystyle % "toc display" as if etoc was not loaded
+\etocstandardlines % "toc lines as if etoc was not loaded
+
+% Add link to TOC
+\addtocontents{toc}{\protect\hypertarget{toc}{}}
+
+\tableofcontents % Output the table of contents
+
+% \listoffigures % Output the list of figures
+
+% % Comment both of the following lines to have the LOF and the LOT on different pages
+% \let\cleardoublepage\bigskip
+% \let\clearpage\bigskip
+
+% \listoftables % Output the list of tables
+
+\endgroup
+
+%----------------------------------------------------------------------------------------
+%	MAIN BODY
+%----------------------------------------------------------------------------------------
+
+\pagelayout{margin}
+\input{chapters/carla.tex}
+
+\mainmatter % Denotes the start of the main document content, resets page numbering and uses arabic numbers
+
+\setchapterstyle{kao} % Choose the default chapter heading style
+
+\input{chapters/introduction.tex}
+
+\pagelayout{wide} % No margins
+\addpart{Finitary Type Theories}
+\labpart{finitary-TT}
+\pagelayout{margin} % Restore margins
+
+\input{chapters/introduction-finitary-TT.tex}
+
+
+\pagelayout{wide} % No margins
+\addpart{Transformations of type theories}
+\labpart{transformations}
+\pagelayout{margin} % Restore margins
+
+\input{chapters/introduction-transformations.tex}
+
+
+
+
+
+\pagelayout{margin} % Restore margins
+\input{chapters/conclusions.tex}
+\pagelayout{wide} % No margins
+
+\appendix
+
+\pagelayout{wide} % No margins
+\addpart{Appendix}
+\pagelayout{margin} % Restore margins
+
+\input{chapters/propositions-as-types.tex}
+
+%----------------------------------------------------------------------------------------
+
+\backmatter % Denotes the end of the main document content
+\setchapterstyle{plain} % Output plain chapters from this point onwards
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+% The bibliography needs to be compiled with biber using your LaTeX editor, or on the command line with 'biber main' from the template directory
+
+% \defbibnote{bibnote}{\label{bib}Here are the references in the alphabtetical order.\par\bigskip} % Prepend this text to the bibliography
+% \printbibliography[heading=bibintoc, title=Bibliography, prenote=bibnote] % Add the bibliography heading to the ToC, set the title of the bibliography and output the bibliography note
+
+\printbibliography[heading=bibintoc, title=Bibliography] % Add the bibliography heading to the ToC, set the title of the bibliography and output the bibliography note
+
+%----------------------------------------------------------------------------------------
+%	SLOVENIAN SUMMARY
+%----------------------------------------------------------------------------------------
+
+% \selectlanguage{slovene}
+
+% \input{chapters/slovene-summary.tex}
+
+% \selectlanguage{english}
+
+%----------------------------------------------------------------------------------------
+%	INDEX
+%----------------------------------------------------------------------------------------
+
+% The index needs to be compiled on the command line with 'makeindex main' from the template directory
+
+\printindex % Output the index
+
+%----------------------------------------------------------------------------------------
+%	BACK COVER
+%----------------------------------------------------------------------------------------
+
+% If you have a PDF/image file that you want to use as a back cover, uncomment the following lines
+
+% \clearpage
+% \thispagestyle{empty}
+% \null%
+% \clearpage
+% \cleartoevenpage[\thispagestyle{empty}]
+% \includepdf[pages={2}]{import/cover}
+
+%----------------------------------------------------------------------------------------
+
+
+
+
+
+\end{document}

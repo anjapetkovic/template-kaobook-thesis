@@ -1,0 +1,40 @@
+\chapter{A quick guide to reading this thesis}
+
+In this day and age a document of this size is usually read on an electronic media. Thanks to Théo Winterhalter, who inspired me to use the kaobook class to generate this kind of document, the thesis is adapted for a convenient use electronically, without compromising the experience on the paper version.
+
+The document contains a wide margin to accommodate accompanying comments, citations, side notes etc. The reader may also use the margin to scribble their own notes should they wish -- this feature is actually even more enjoyable on paper.
+The references to definitions (like~\refdef{TT-transformation}), theorems (like~\refthm{elaboration}), lemmas (like~\reflemma{action-inter-substitution}), propositions (like~\refprop{tt-weakening}), examples (like~\refexample{propositions-as-types}) and even type-theoretic rules (like~\rref{TT-Tm-Sym}) are clickable so one can quickly travel to the relevant part of the document.
+
+Citations like~\sidecite[-0.7cm]{cockx:TTunchained} appear in the
+margin (also clickable) in a short version listing just the first author, as well as in the \refbib~where the full citations can be found.
+Instead of the footnotes we use side notes\sidenote{Just like this one :)}
+so one does not have to scroll (or look) at the bottom of the page.
+
+The margin will also contain margin notes, comments accompanying the main text.
+These notes are not placed automatically, but are adjusted so they are close to
+the relevant paragraph.
+\marginnote[-0.4cm]{
+  This is supposedly relevant to what is on the left.
+}
+
+The margin also contains reminders.
+\reminder[-0.7cm]{of a concept}{
+  Sometimes we will have a reminder in the margin if a concept is not used very often.
+}
+
+\begin{theorem}
+  Theorems will stand out in these red boxes, so they are easy to spot.
+\end{theorem}
+
+\begin{definition}
+    Definitions will appear in the yellow boxes. The defining notions will appear in \defemph{red}.
+\end{definition}
+
+\begin{lemma}
+    Lemmas and propositions are in green boxes.
+\end{lemma}
+
+If a reminder is a definition, it will appear in a yellow box. Sometimes we will introduce a notion without paying too much attention to it. In such cases we will also use the yellow boxes on the right.
+\sidedef[-2cm]{of side definition}{
+  This is a \defemph{side definition}.
+}

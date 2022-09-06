@@ -1,0 +1,97 @@
+\chapter{Introduction}
+
+\begin{definition}
+    \labdef{TT-transformation}
+    A \defemph{type-theoretic transformation} $f \colon \theory{T} \to \theory{U}$ is a syntactic transformation $f \colon \Sigma_\theory{T} \to \Sigma_\theory{U}$ such that for each rule $\rawRule{\Theta}{\J}$ in $\theory{T}$ we have a derivation $\derivation$ of $\rawRule{\act{f} \Theta}{\act{f}\J}$ in $\theory{U}$.
+\end{definition}
+
+\begin{theorem}[The Elaboration Theorem]
+    \labthm{elaboration}
+    Every finitary type theory has an elaboration.
+\end{theorem}
+
+\begin{lemma}
+    \lablemma{action-inter-substitution}
+    Action interacts with substitution:
+    Let $f \colon \Sigma_1 \to \Sigma_2$ be a syntactic transformation and $e$ and $t$ well-formed expressions in the syntax over $\Sigma_1$. The following equation holds
+    %
+    \begin{equation*}
+        \act{f}(e[t/x]) = (\act{f}e)[\act{f}t/x].
+    \end{equation*}
+    %
+\end{lemma}
+
+  \begin{proposition}[Weakening]
+    \labprop{tt-weakening}
+    For a raw type theory:
+    %
+    \begin{enumerate}
+    \item If $\Theta; \Gamma_1, \Gamma_2 \types \JJ$ then $\Theta; \Gamma_1, \var{a} \of A, \Gamma_2 \types \JJ$.
+    \item If $\Theta_1, \Theta_2; \Gamma \types \JJ$ then $\Theta_1, \symM \of \BB, \Theta_2; \Gamma \types \JJ$.
+    \end{enumerate}
+    %
+    An analogous statement holds for boundaries.
+  \end{proposition}
+
+  \marginnote[+7cm]{Note that since syntactic transformations preserve classes, propositions have to be mapped to terms and not syntactic types.}
+\begin{example}
+    \labexample{propositions-as-types}
+    One of the most well-known transformations is the \defemph{propositions as types}, also known as the Curry-Howard correspondence~\sidecite[]{Wadler15:prop-as-types, Curry34:prop-as-types, Curry-Freys58:combinatoryLogic, Howard80:Formulae-as-types} that translates mathematical proofs of first-order logic to terms of type theory and thus gives them computational content.
+    We exhibit the transformation from first-order logic (FOL) to the relevant fragment of the Martin-Löf type theory (MLTT) \sidecite[+2cm]{Martin-Lof-1972,Martin-Lof-1973,Martin-Lof-1979,martin-lof:bibliopolis} with one universe of (small) types.
+
+    The full formulation of FOL and MLTT, as well as the type-theoretic transformation is in the Appendix~\refch{propositions-as-types}.
+    The idea is to map the type $\sym{o}$ of propositions in FOL to the universe $\sym{U}$ of MLTT and the terms that represent propositions $\sym{p} : \sym{o}$ to the codes
+    for types $\sym{a} : \sym{U}$. We also map the type $\sym{i}$ of individuals in FOL to the $\sym{base}$ type in MLTT.
+
+    The rest of the connectives are mapped as usual, for example the conjunctions $\sym{conj}$ are mapped to the simple products $\upsigma(\sym{p}, \abstr{x} \sym{q})$ and universal quantifiers to the dependent products.
+
+    In~\refch{propositions-as-types} we also write justification that this is indeed a type-theoretic transformation,~i.e. that derivability is preserved.
+\end{example}
+
+
+\begin{figure}[pht]
+    \centering
+    \small
+    \begin{ruleframe}
+    \begin{mathpar}
+    \inferenceRule{TT-Ty-Refl}
+    { \Theta; \Gamma \types \isType { A } }
+    { \Theta; \Gamma \types A \equiv A }
+
+    \inferenceRule{TT-Ty-Sym}
+    { \Theta; \Gamma \types A \equiv B }
+    { \Theta; \Gamma \types B \equiv A }
+
+    \inferenceRule{TT-Ty-Tran}
+    { \Theta; \Gamma \types A \equiv B \\
+      \Theta; \Gamma \types B \equiv C }
+    { \Theta; \Gamma \types A \equiv C }
+
+    \inferenceRule{TT-Tm-Refl}
+    { \Theta; \Gamma \types t : A }
+    { \Theta; \Gamma \types t \equiv t : A }
+
+    \inferenceRule{TT-Tm-Sym}
+    { \Theta; \Gamma \types s \equiv t : A }
+    { \Theta; \Gamma \types t \equiv s : A}
+
+    \inferenceRule{TT-Tm-Tran}
+    { \Theta; \Gamma \types s \equiv t : A \\
+      \Theta; \Gamma \types t \equiv u : A }
+    { \Theta; \Gamma \types s \equiv u : A }
+
+    \inferenceRule{TT-Conv-Tm}
+    { \Theta; \Gamma \types t : A \\
+      \Theta; \Gamma \types A \equiv B }
+    { \Theta; \Gamma \types t : B }
+
+    \inferenceRule{TT-Conv-Eq}
+    {
+      \Theta; \Gamma \types s \equiv t : A \\
+      \Theta; \Gamma \types A \equiv B }
+    { \Theta; \Gamma \types s \equiv t : B }
+    \end{mathpar}
+    \end{ruleframe}
+    \caption{Equality closure rules.}
+    \labfig{equality-rules}
+  \end{figure}
